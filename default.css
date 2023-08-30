@@ -1,0 +1,21 @@
+input {
+  font: inherit;
+}
+
+input[type="text"] {
+  padding: 4px 8px;
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  text-align: center;
+}
+
+/* .searchBox {
+ 
+} */
+
+.searchBox:focus {
+  outline: 1.5px solid var(--textbox-outline-active-color);
+}

@@ -1,0 +1,76 @@
+@import url('default.css');
+
+:root {
+  --header-main-color: lightblue;
+  --textbox-outline-active-color: blue;
+  --default-border-radius: 10px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif, system-ui;
+  font-size: 1.2rem;
+}
+
+.header {
+  /* position: relative; */
+  display: flex;
+  background-color: var(--header-main-color);
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 1rem;
+}
+
+.leftHeader {
+  color: white;
+  border: 1.5px solid orange;
+  border-radius: var(--default-border-radius);
+  padding: .5rem;
+  background: linear-gradient(rgb(255, 216, 143), rgb(255, 199, 96));
+}
+
+/* .middleHeader {
+  display: flex;
+} */
+
+form {
+  display: flex;
+  gap: 0 1rem;
+}
+
+.rightHeader {
+  position: relative;
+}
+
+.smallBtn {
+  border: 1.5px solid white;
+  border-radius: 10px;
+  padding: .5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.smallBtn:hover {
+  background-color: rgb(195, 239, 253);
+}
+
+.headerSettings {
+  position: absolute;
+  border: 1.5px solid gray;
+  border-top: none;
+  background-color: lightgray;
+  border-radius: 2px;
+  right: 4px;
+  padding: 1rem;
+}
+
+.hide {
+  opacity: 0;
+}
