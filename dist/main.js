@@ -41,7 +41,11 @@ input[type="text"] {
 
 .searchBox:focus {
   outline: 1.5px solid var(--textbox-outline-active-color);
-}`, "",{"version":3,"sources":["webpack://./src/default.css"],"names":[],"mappings":"AAAA;EACE,aAAa;AACf;;AAEA;EACE,gBAAgB;EAChB,YAAY;EACZ,YAAY;EACZ,mBAAmB;EACnB,aAAa;EACb,YAAY;EACZ,kBAAkB;AACpB;;AAEA;;GAEG;;AAEH;EACE,wDAAwD;AAC1D","sourcesContent":["input {\n  font: inherit;\n}\n\ninput[type=\"text\"] {\n  padding: 4px 8px;\n  width: 300px;\n  height: 40px;\n  border-radius: 10px;\n  outline: none;\n  border: none;\n  text-align: center;\n}\n\n/* .searchBox {\n \n} */\n\n.searchBox:focus {\n  outline: 1.5px solid var(--textbox-outline-active-color);\n}"],"sourceRoot":""}]);
+}
+
+.hide {
+  opacity: 0;
+}`, "",{"version":3,"sources":["webpack://./src/default.css"],"names":[],"mappings":"AAAA;EACE,aAAa;AACf;;AAEA;EACE,gBAAgB;EAChB,YAAY;EACZ,YAAY;EACZ,mBAAmB;EACnB,aAAa;EACb,YAAY;EACZ,kBAAkB;AACpB;;AAEA;;GAEG;;AAEH;EACE,wDAAwD;AAC1D;;AAEA;EACE,UAAU;AACZ","sourcesContent":["input {\n  font: inherit;\n}\n\ninput[type=\"text\"] {\n  padding: 4px 8px;\n  width: 300px;\n  height: 40px;\n  border-radius: 10px;\n  outline: none;\n  border: none;\n  text-align: center;\n}\n\n/* .searchBox {\n \n} */\n\n.searchBox:focus {\n  outline: 1.5px solid var(--textbox-outline-active-color);\n}\n\n.hide {\n  opacity: 0;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -87,7 +91,15 @@ ___CSS_LOADER_EXPORT___.push([module.id, `:root {
 body {
   font-family: sans-serif, system-ui;
   font-size: 1.2rem;
+  background: linear-gradient(#a8ffff, #ceffff);
+  min-height: 100svh;
 }
+
+.container {
+  height: 100%;
+}
+
+/* HEADER */
 
 .header {
   /* position: relative; */
@@ -119,12 +131,16 @@ form {
   position: relative;
 }
 
+
+/* BUTTONS */
+
 .smallBtn {
   border: 1.5px solid white;
   border-radius: 10px;
   padding: .5rem;
   color: white;
   cursor: pointer;
+  background-color: inherit;
 }
 
 .smallBtn:hover {
@@ -141,9 +157,23 @@ form {
   padding: 1rem;
 }
 
-.hide {
-  opacity: 0;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAEA;EACE,8BAA8B;EAC9B,oCAAoC;EACpC,6BAA6B;AAC/B;;AAEA;;;EAGE,SAAS;EACT,UAAU;EACV,sBAAsB;AACxB;;AAEA;EACE,kCAAkC;EAClC,iBAAiB;AACnB;;AAEA;EACE,wBAAwB;EACxB,aAAa;EACb,0CAA0C;EAC1C,8BAA8B;EAC9B,mBAAmB;EACnB,mBAAmB;AACrB;;AAEA;EACE,YAAY;EACZ,0BAA0B;EAC1B,2CAA2C;EAC3C,cAAc;EACd,kEAAkE;AACpE;;AAEA;;GAEG;;AAEH;EACE,aAAa;EACb,WAAW;AACb;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,yBAAyB;EACzB,mBAAmB;EACnB,cAAc;EACd,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE,oCAAoC;AACtC;;AAEA;EACE,kBAAkB;EAClB,wBAAwB;EACxB,gBAAgB;EAChB,2BAA2B;EAC3B,kBAAkB;EAClB,UAAU;EACV,aAAa;AACf;;AAEA;EACE,UAAU;AACZ","sourcesContent":["@import url('default.css');\n\n:root {\n  --header-main-color: lightblue;\n  --textbox-outline-active-color: blue;\n  --default-border-radius: 10px;\n}\n\n*,\n*::before,\n*::after {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nbody {\n  font-family: sans-serif, system-ui;\n  font-size: 1.2rem;\n}\n\n.header {\n  /* position: relative; */\n  display: flex;\n  background-color: var(--header-main-color);\n  justify-content: space-between;\n  align-items: center;\n  padding: .5rem 1rem;\n}\n\n.leftHeader {\n  color: white;\n  border: 1.5px solid orange;\n  border-radius: var(--default-border-radius);\n  padding: .5rem;\n  background: linear-gradient(rgb(255, 216, 143), rgb(255, 199, 96));\n}\n\n/* .middleHeader {\n  display: flex;\n} */\n\nform {\n  display: flex;\n  gap: 0 1rem;\n}\n\n.rightHeader {\n  position: relative;\n}\n\n.smallBtn {\n  border: 1.5px solid white;\n  border-radius: 10px;\n  padding: .5rem;\n  color: white;\n  cursor: pointer;\n}\n\n.smallBtn:hover {\n  background-color: rgb(195, 239, 253);\n}\n\n.headerSettings {\n  position: absolute;\n  border: 1.5px solid gray;\n  border-top: none;\n  background-color: lightgray;\n  border-radius: 2px;\n  right: 4px;\n  padding: 1rem;\n}\n\n.hide {\n  opacity: 0;\n}"],"sourceRoot":""}]);
+
+/* Content */
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+  /* justify-content: center; */
+  border: 1px solid red;
+  padding: 1rem 2rem;
+}
+
+.card {
+  border: 1px solid blue;
+  border-radius: var(--default-border-radius);
+  padding: 1rem;
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAEA;EACE,8BAA8B;EAC9B,oCAAoC;EACpC,6BAA6B;AAC/B;;AAEA;;;EAGE,SAAS;EACT,UAAU;EACV,sBAAsB;AACxB;;AAEA;EACE,kCAAkC;EAClC,iBAAiB;EACjB,6CAA6C;EAC7C,kBAAkB;AACpB;;AAEA;EACE,YAAY;AACd;;AAEA,WAAW;;AAEX;EACE,wBAAwB;EACxB,aAAa;EACb,0CAA0C;EAC1C,8BAA8B;EAC9B,mBAAmB;EACnB,mBAAmB;AACrB;;AAEA;EACE,YAAY;EACZ,0BAA0B;EAC1B,2CAA2C;EAC3C,cAAc;EACd,kEAAkE;AACpE;;AAEA;;GAEG;;AAEH;EACE,aAAa;EACb,WAAW;AACb;;AAEA;EACE,kBAAkB;AACpB;;;AAGA,YAAY;;AAEZ;EACE,yBAAyB;EACzB,mBAAmB;EACnB,cAAc;EACd,YAAY;EACZ,eAAe;EACf,yBAAyB;AAC3B;;AAEA;EACE,oCAAoC;AACtC;;AAEA;EACE,kBAAkB;EAClB,wBAAwB;EACxB,gBAAgB;EAChB,2BAA2B;EAC3B,kBAAkB;EAClB,UAAU;EACV,aAAa;AACf;;;AAGA,YAAY;;AAEZ;EACE,aAAa;EACb,0BAA0B;EAC1B,mBAAmB;EACnB,6BAA6B;EAC7B,qBAAqB;EACrB,kBAAkB;AACpB;;AAEA;EACE,sBAAsB;EACtB,2CAA2C;EAC3C,aAAa;AACf","sourcesContent":["@import url('default.css');\n\n:root {\n  --header-main-color: lightblue;\n  --textbox-outline-active-color: blue;\n  --default-border-radius: 10px;\n}\n\n*,\n*::before,\n*::after {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nbody {\n  font-family: sans-serif, system-ui;\n  font-size: 1.2rem;\n  background: linear-gradient(#a8ffff, #ceffff);\n  min-height: 100svh;\n}\n\n.container {\n  height: 100%;\n}\n\n/* HEADER */\n\n.header {\n  /* position: relative; */\n  display: flex;\n  background-color: var(--header-main-color);\n  justify-content: space-between;\n  align-items: center;\n  padding: .5rem 1rem;\n}\n\n.leftHeader {\n  color: white;\n  border: 1.5px solid orange;\n  border-radius: var(--default-border-radius);\n  padding: .5rem;\n  background: linear-gradient(rgb(255, 216, 143), rgb(255, 199, 96));\n}\n\n/* .middleHeader {\n  display: flex;\n} */\n\nform {\n  display: flex;\n  gap: 0 1rem;\n}\n\n.rightHeader {\n  position: relative;\n}\n\n\n/* BUTTONS */\n\n.smallBtn {\n  border: 1.5px solid white;\n  border-radius: 10px;\n  padding: .5rem;\n  color: white;\n  cursor: pointer;\n  background-color: inherit;\n}\n\n.smallBtn:hover {\n  background-color: rgb(195, 239, 253);\n}\n\n.headerSettings {\n  position: absolute;\n  border: 1.5px solid gray;\n  border-top: none;\n  background-color: lightgray;\n  border-radius: 2px;\n  right: 4px;\n  padding: 1rem;\n}\n\n\n/* Content */\n\n.content {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-auto-flow: row;\n  /* justify-content: center; */\n  border: 1px solid red;\n  padding: 1rem 2rem;\n}\n\n.card {\n  border: 1px solid blue;\n  border-radius: var(--default-border-radius);\n  padding: 1rem;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -678,7 +708,6 @@ const API_KEY = '89d2133b42d54c8fa95201905232808';
 const getCurrentWeather = async function getCurrentWeather(location) {
   const url = 'http://api.weatherapi.com/v1';
   const currentEndPoint = '/current.json';
-  const forecastEndPoint = '/forecast.json';
 
   try {
     const response = await fetch(`${url}${currentEndPoint}?key=${API_KEY}&q=${location}`);
@@ -690,10 +719,10 @@ const getCurrentWeather = async function getCurrentWeather(location) {
 };
 
 const handleCurrentWeatherRequest = async function handleCurrentWeatherRequest(location = 'kansas city') {
-  const weatherData = await getCurrentWeather(location);
+  const weatherData = await getForecastWeather(location);
   console.log(weatherData);
 };
-handleCurrentWeatherRequest('64153');
+// handleCurrentWeatherRequest('64153');
 
 // const getForecastWeather
 // const handleForecastWeather
@@ -707,6 +736,63 @@ handleCurrentWeatherRequest('64153');
  -maybe one handler that calls both functions with a Promise.all
  -then to extract data from the promise.all array, use destructuring -> [a,b] = promise.all then return {a,b}
 */
+
+const weatherController = function weatherController() {
+  const getForecastWeather = async function getForecastWeather(location) {
+    const url = 'http://api.weatherapi.com/v1';
+    const forecastEndPoint = '/forecast.json';
+    try {
+      const response = await fetch(`${url}${forecastEndPoint}?key=${API_KEY}&q=${location}&days=3&aqi=yes&alerts=yes`);
+      const forecastWeatherData = await response.json();
+      return forecastWeatherData;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return { getForecastWeather };
+};
+
+const screenController = async function screenController() {
+  console.log('running the screenController');
+  const weatherControl = weatherController();
+
+  // DOM ELEMENTS
+  const locationSearchBtn = document.querySelector('.searchBtn');
+  const searchForm = document.querySelector('#locationForm');
+  const searchTextBox = document.querySelector('.searchBox');
+  const tempUnitsBtn = document.querySelector('.tempUnits');
+
+  // FUNCTION EXPRESSIONS
+  const displayWeatherData = function displayWeatherData(weather) {
+    console.log(weather);
+  };
+  const searchBtnHandler = function searchBtnHandler() {
+    if (searchTextBox.validity.valueMissing) {
+      console.log('invalid');
+      searchTextBox.setCustomValidity('Enter a City or Zip Code');
+    } else {
+      searchTextBox.setCustomValidity('');
+    }
+  };
+  const searchFormHandler = async function searchFormHandler(e) {
+    e.preventDefault();
+    const userLocation = searchTextBox.value;
+    console.log('Getting weather information..');
+    try {
+      const forecastData = await weatherControl.getForecastWeather(userLocation);
+      displayWeatherData(forecastData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // DOM EVENT LISTENERS
+  locationSearchBtn.addEventListener('click', searchBtnHandler);
+  searchForm.addEventListener('submit', searchFormHandler);
+};
+
+screenController();
 
 })();
 

@@ -19,3 +19,7 @@ input[type="text"] {
 .searchBox:focus {
   outline: 1.5px solid var(--textbox-outline-active-color);
 }
+
+.hide {
+  opacity: 0;
+}
