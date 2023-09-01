@@ -19,18 +19,66 @@
         </form>
       </div>
       <div class="rightHeader">
-        <div class="tempUnits smallBtn">°F</div>
+        <div class="tempUnits smallBtn" data-temp="f">°F</div>
       </div>
     </div>
-    <div class="headerSettings hide">test</div>
-    <div class="content">
-      <div class="card">
-        <h2>Kansas CITY MO</h2>
-        <h3>100 Degrees</h3>
-        <h3>FAIR</h3>
-        <h4>Feels like</h4>
+    <div class="headerSettings hide"></div>
+
+    <div class="content-container">
+      <div class="errorDiv"></div>
+      <div class="content">
+        <div class="card currentCard hide">
+          <div class="cardHeader">
+            <p class="current-city-label">Current - Kansas City, MO</p>
+            <span class="current-time-label">1:20PM</span>
+          </div>
+          <div class="cardWeatherConditions">
+            <div class="cardWeatherConditionsLeft">
+              <div class="cardWeatherImportant">
+                <div class="current-weather-logo">
+                  <img src="" alt="" id="weatherLogo">
+                </div>
+                <p class="current-temp-label">TEMP</p>
+              </div>
+              <p class="current-conditions-label">SUNNY</p>
+            </div>
+            <div class="cardWeatherConditionsRight">
+
+              <div class="rc">
+                <div class="current-real-feel-div">
+                  <p>Real Feel:</p>
+                  <p class="current-realfeel-label">10</p>
+                </div>
+                <div class="current-wind-div">
+                  <p>Wind:</p>
+                  <p class="current-wind-label">1</p>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="cardWeatherDetails">
+            <div class="cardWeatherDetailsLeft">
+              <div class="uvIndexContainer">
+                <p>UV Index</p>
+                <p>7 High</p>
+              </div>
+              <div class="humidityContainer">
+                <p>Humidity</p>
+                <p>80%</p>
+              </div>
+            </div>
+            <div class="cardWeatherDetailsRight">
+              <div class="test">
+                <p>prop</p>
+                <p>value</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="details">details</div>
     </div>
 
   </div>
