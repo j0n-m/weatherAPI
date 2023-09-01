@@ -1,4 +1,5 @@
 import './style.css';
+import showError from './error';
 
 const API_KEY = '89d2133b42d54c8fa95201905232808';
 
@@ -40,10 +41,14 @@ const weatherController = function weatherController() {
     const forecastEndPoint = '/forecast.json';
     try {
       const response = await fetch(`${url}${forecastEndPoint}?key=${API_KEY}&q=${location}&days=3&aqi=yes&alerts=yes`);
+      if (!response.ok) {
+        throw new Error('Invalid Location');
+      }
       const forecastWeatherData = await response.json();
       return forecastWeatherData;
     } catch (err) {
-      console.log(err);
+      console.log('1:', err);
+      showError(err);
     }
   };
 
@@ -59,10 +64,57 @@ const screenController = async function screenController() {
   const searchForm = document.querySelector('#locationForm');
   const searchTextBox = document.querySelector('.searchBox');
   const tempUnitsBtn = document.querySelector('.tempUnits');
+  let tempUnit = tempUnitsBtn.dataset.temp;
+  const contentDiv = document.querySelector('.content');
+  const cardTemplate = [...contentDiv.children];
 
   // FUNCTION EXPRESSIONS
   const displayWeatherData = function displayWeatherData(weather) {
-    console.log(weather);
+    console.log('displaying weather', weather);
+  };
+  const extractTime = function extractTime(time) {
+    const options = {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',
+    };
+    return new Date(time).toLocaleDateString('en-US', options);
+  };
+  function getIconSource(imgLink) {
+    const imgArr = imgLink.split('');
+    return (`http://${imgArr.slice(2).join('')}`);
+  }
+  const updateCurrentWeatherCard = function updateCurrentWeatherCard(currentWeather) {
+    const currentCard = document.querySelector('.currentCard');
+    const currentTempLabel = document.querySelector('.current-temp-label');
+    const currentCity = document.querySelector('.current-city-label');
+    const currentConditions = document.querySelector('.current-conditions-label');
+    const currentRealFeel = document.querySelector('.current-realfeel-label');
+    const currentTimeLabel = document.querySelector('.current-time-label');
+    const currentWeatherLogo = document.querySelector('#weatherLogo');
+    const currentWind = document.querySelector('.current-wind-label');
+
+    contentDiv.replaceChildren(); // Remove the current card's contents
+    contentDiv.appendChild(cardTemplate[0]); // appends the default card template to page, read to be overwritten
+    currentCard.classList.remove('hide');
+    currentTempLabel.textContent = `${currentWeather.current[`temp_${tempUnit}`]}°${tempUnit.toUpperCase()}`;
+    currentCity.textContent = `Current - ${currentWeather.location.name}, ${currentWeather.location.region}`;
+    currentConditions.textContent = `${currentWeather.current.condition.text}`;
+    currentRealFeel.textContent = `${currentWeather.current[`feelslike_${tempUnit}`]}°${tempUnit.toUpperCase()}`;
+    currentTimeLabel.textContent = extractTime(currentWeather.current.last_updated);
+    currentWind.textContent = `${currentWeather.current.wind_dir} ${currentWeather.current.wind_mph} mph`;
+    currentWeatherLogo.src = getIconSource(currentWeather.current.condition.icon);
+  };
+  const toggleTempUnit = function toggleTempUnit() {
+    switch (tempUnitsBtn.dataset.temp) {
+      case 'f':
+        tempUnitsBtn.dataset.temp = 'c';
+        tempUnitsBtn.textContent = '°C';
+        break;
+      case 'c':
+        tempUnitsBtn.dataset.temp = 'f';
+        tempUnitsBtn.textContent = '°F';
+        break;
+    }
+    tempUnit = tempUnitsBtn.dataset.temp;
   };
   const searchBtnHandler = function searchBtnHandler() {
     if (searchTextBox.validity.valueMissing) {
@@ -78,15 +130,20 @@ const screenController = async function screenController() {
     console.log('Getting weather information..');
     try {
       const forecastData = await weatherControl.getForecastWeather(userLocation);
+      if (!forecastData) {
+        return;
+      }
       displayWeatherData(forecastData);
+      updateCurrentWeatherCard(forecastData);
     } catch (err) {
-      console.log(err);
+      console.log('Error2', err);
     }
   };
 
   // DOM EVENT LISTENERS
   locationSearchBtn.addEventListener('click', searchBtnHandler);
   searchForm.addEventListener('submit', searchFormHandler);
+  tempUnitsBtn.addEventListener('click', toggleTempUnit);
 };
 
 screenController();
