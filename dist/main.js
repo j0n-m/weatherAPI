@@ -816,6 +816,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const API_KEY = '89d2133b42d54c8fa95201905232808';
 
 const getCurrentWeather = async function getCurrentWeather(location) {
@@ -906,17 +907,23 @@ const screenController = async function screenController() {
     const currentTimeLabel = document.querySelector('.current-time-label');
     const currentWeatherLogo = document.querySelector('#weatherLogo');
     const currentWind = document.querySelector('.current-wind-label');
+    const currentUVIndex = document.querySelector('.uvIndexValue');
+    const currentHumidity = document.querySelector('.humidityValue');
+    const currentVisibility = document.querySelector('.visibilityValue');
 
     contentDiv.replaceChildren(); // Remove the current card's contents
     contentDiv.appendChild(cardTemplate[0]); // appends the default card template to page, read to be overwritten
     currentCard.classList.remove('hide');
     currentTempLabel.textContent = `${currentWeather.current[`temp_${tempUnit}`]}°${tempUnit.toUpperCase()}`;
-    currentCity.textContent = `Current - ${currentWeather.location.name}, ${currentWeather.location.region}`;
+    currentCity.textContent = `Current - ${currentWeather.location.name}, ${currentWeather.location.region}, ${currentWeather.location.country}`;
     currentConditions.textContent = `${currentWeather.current.condition.text}`;
     currentRealFeel.textContent = `${currentWeather.current[`feelslike_${tempUnit}`]}°${tempUnit.toUpperCase()}`;
     currentTimeLabel.textContent = extractTime(currentWeather.current.last_updated);
     currentWind.textContent = `${currentWeather.current.wind_dir} ${currentWeather.current.wind_mph} mph`;
     currentWeatherLogo.src = getIconSource(currentWeather.current.condition.icon);
+    currentUVIndex.textContent = `${currentWeather.current.uv}`;
+    currentHumidity.textContent = `${currentWeather.current.humidity}%`;
+    currentVisibility.textContent = `${currentWeather.current.vis_miles} mi`;
   };
   const toggleTempUnit = function toggleTempUnit() {
     switch (tempUnitsBtn.dataset.temp) {
@@ -927,6 +934,8 @@ const screenController = async function screenController() {
       case 'c':
         tempUnitsBtn.dataset.temp = 'f';
         tempUnitsBtn.textContent = '°F';
+        break;
+      default:
         break;
     }
     tempUnit = tempUnitsBtn.dataset.temp;
@@ -960,7 +969,7 @@ const screenController = async function screenController() {
   searchForm.addEventListener('submit', searchFormHandler);
   tempUnitsBtn.addEventListener('click', toggleTempUnit);
 };
-
+console.log('(NOTE) NEED TO ADD: \n*3-day forecast \n*sunrise/sunset times');
 screenController();
 
 })();
