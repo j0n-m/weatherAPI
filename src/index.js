@@ -79,12 +79,39 @@ const screenController = async function screenController() {
     };
     return new Date(time).toLocaleDateString('en-US', options);
   };
+  const extractTimeShort = function extractTimeShort(time) {
+    const newDate = time.replaceAll('-', '/');
+    return format(new Date(newDate), 'E, LLL. d');
+  };
   function getIconSource(imgLink) {
     const imgArr = imgLink.split('');
     return (`http://${imgArr.slice(2).join('')}`);
   }
+  const updateForecastCards = function updateForecastCards(forecastWeather) {
+    const cardHeader = document.querySelectorAll('.smallCardHeader');
+    const cardLogo = document.querySelectorAll('.smallCardLogo');
+    const highTempValue = document.querySelectorAll('.hiTemp');
+    const lowTempValue = document.querySelectorAll('.loTemp');
+    const conditionTitle = document.querySelectorAll('.smallCardCondition');
+    const rainChance = document.querySelectorAll('.smallCardRainChance');
+    const humidity = document.querySelectorAll('.smallCardHumidity');
+    const uvIndex = document.querySelectorAll('.smallCardUVIndex');
+    const forecastDaysArray = [...forecastWeather.forecast.forecastday];
+    forecastDaysArray.forEach((day, index) => {
+      cardHeader[index].textContent = extractTimeShort(day.date);
+      cardLogo[index].src = getIconSource(day.day.condition.icon);
+      highTempValue[index].textContent = `${day.day[`maxtemp_${tempUnit}`]}° Hi`;
+      lowTempValue[index].textContent = `/ ${day.day[`mintemp_${tempUnit}`]}° Lo`;
+      conditionTitle[index].textContent = `${day.day.condition.text}`;
+      rainChance[index].textContent = `Precip. ${day.day.daily_chance_of_rain}%`;
+      humidity[index].textContent = `${day.day.avghumidity}%`;
+      uvIndex[index].textContent = `${day.day.uv}`;
+    });
+    console.log(forecastWeather);
+  };
   const updateCurrentWeatherCard = function updateCurrentWeatherCard(currentWeather) {
     const currentCard = document.querySelector('.currentCard');
+    const forecastCard = document.querySelector('.forecastCard');
     const currentTempLabel = document.querySelector('.current-temp-label');
     const currentCity = document.querySelector('.current-city-label');
     const currentConditions = document.querySelector('.current-conditions-label');
@@ -95,10 +122,21 @@ const screenController = async function screenController() {
     const currentUVIndex = document.querySelector('.uvIndexValue');
     const currentHumidity = document.querySelector('.humidityValue');
     const currentVisibility = document.querySelector('.visibilityValue');
+    const currentPressure = document.querySelector('.pressureValue');
+    const currentRainChance = document.querySelector('.rainChanceValue');
+    const currentWindGust = document.querySelector('.windGustValue');
+    const weatherAlert = document.querySelector('.weatherAlert');
+    const currentSunrise = document.querySelector('.sunriseValue');
+    const currentSunset = document.querySelector('.sunsetValue');
+    const currentMoonrise = document.querySelector('.moonriseValue');
+    const currentMoonset = document.querySelector('.moonsetValue');
+    const weatherAlerts = currentWeather.alerts.alert.length;
 
     contentDiv.replaceChildren(); // Remove the current card's contents
     contentDiv.appendChild(cardTemplate[0]); // appends the default card template to page, read to be overwritten
+    contentDiv.appendChild(cardTemplate[1]);
     currentCard.classList.remove('hide');
+    forecastCard.classList.remove('hide');
     currentTempLabel.textContent = `${currentWeather.current[`temp_${tempUnit}`]}°${tempUnit.toUpperCase()}`;
     currentCity.textContent = `Current - ${currentWeather.location.name}, ${currentWeather.location.region}, ${currentWeather.location.country}`;
     currentConditions.textContent = `${currentWeather.current.condition.text}`;
@@ -109,6 +147,18 @@ const screenController = async function screenController() {
     currentUVIndex.textContent = `${currentWeather.current.uv}`;
     currentHumidity.textContent = `${currentWeather.current.humidity}%`;
     currentVisibility.textContent = `${currentWeather.current.vis_miles} mi`;
+    currentWindGust.textContent = `${currentWeather.current.gust_mph} mph`;
+    currentPressure.textContent = `${currentWeather.current.pressure_in} in`;
+    currentRainChance.textContent = `${currentWeather.forecast.forecastday[0].day.daily_chance_of_rain}%`;
+    currentSunrise.textContent = `${currentWeather.forecast.forecastday[0].astro.sunrise}`;
+    currentSunset.textContent = `${currentWeather.forecast.forecastday[0].astro.sunset}`;
+    currentMoonrise.textContent = `${currentWeather.forecast.forecastday[0].astro.moonrise}`;
+    currentMoonset.textContent = `${currentWeather.forecast.forecastday[0].astro.moonset}`;
+
+    if (weatherAlerts) {
+      weatherAlert.textContent = `${currentWeather.alerts.alert[0].headline}`;
+    }
+    updateForecastCards(currentWeather);
   };
   const toggleTempUnit = function toggleTempUnit() {
     switch (tempUnitsBtn.dataset.temp) {
@@ -154,5 +204,5 @@ const screenController = async function screenController() {
   searchForm.addEventListener('submit', searchFormHandler);
   tempUnitsBtn.addEventListener('click', toggleTempUnit);
 };
-console.log('(NOTE) NEED TO ADD: \n*3-day forecast \n*sunrise/sunset times');
+console.log('(NOTE) NEED TO ADD: \n*sunrise/sunset times');
 screenController();

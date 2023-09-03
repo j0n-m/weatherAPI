@@ -151,7 +151,8 @@ form {
   /* background-color: blue; */
 }
 
-.cardWeatherDetails {
+.cardWeatherDetails,
+.smallCardWeatherDetails {
   display: flex;
   gap: 1rem;
 }
@@ -180,4 +181,59 @@ form {
 
 .current-temp-label {
   font-size: 1.75rem;
+}
+
+.weatherAlertContainer {
+  padding-top: 8px;
+  color: red;
+}
+
+.smallCardContainer {
+  display: flex;
+  padding-top: 8px;
+}
+
+.smallCardContainer>div {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  border: 1px solid gray;
+}
+
+.smallCardWeatherCondition {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  /* padding: 0 1rem; */
+}
+
+.smallCardBody {
+  padding: 0 1rem;
+}
+
+.loTemp {
+  font-size: 1rem;
+  color: gray;
+}
+
+.smallCardTemps {
+  flex-grow: 1;
+}
+
+.smallCardWeatherInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.smallCardWeatherDetails {
+  display: flex;
+  text-align: left;
+}
+
+.smallCardDetailsLeft,
+.smallCardDetailsRight {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
 }
