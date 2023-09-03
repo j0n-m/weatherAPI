@@ -41,7 +41,7 @@ const weatherController = function weatherController() {
     const url = 'http://api.weatherapi.com/v1';
     const forecastEndPoint = '/forecast.json';
     try {
-      const response = await fetch(`${url}${forecastEndPoint}?key=${API_KEY}&q=${location}&days=3&aqi=yes&alerts=yes`);
+      const response = await fetch(`${url}${forecastEndPoint}?key=${API_KEY}&q=${location}&days=3&aqi=yes&alerts=yes`, { mode: 'cors' });
       if (!response.ok) {
         throw new Error('Invalid Location');
       }
