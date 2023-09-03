@@ -2,25 +2,6 @@ import './style.css';
 import { formatDistance, format } from 'date-fns';
 import showError from './error';
 
-const API_KEY = '89d2133b42d54c8fa95201905232808';
-
-const getCurrentWeather = async function getCurrentWeather(location) {
-  const url = 'http://api.weatherapi.com/v1';
-  const currentEndPoint = '/current.json';
-
-  try {
-    const response = await fetch(`${url}${currentEndPoint}?key=${API_KEY}&q=${location}`);
-    const currentWeatherData = await response.json();
-    return currentWeatherData;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const handleCurrentWeatherRequest = async function handleCurrentWeatherRequest(location = 'kansas city') {
-  const weatherData = await getForecastWeather(location);
-  console.log(weatherData);
-};
 // handleCurrentWeatherRequest('64153');
 
 // const getForecastWeather
@@ -37,6 +18,7 @@ const handleCurrentWeatherRequest = async function handleCurrentWeatherRequest(l
 */
 
 const weatherController = function weatherController() {
+  const API_KEY = '89d2133b42d54c8fa95201905232808';
   const getForecastWeather = async function getForecastWeather(location) {
     const url = 'http://api.weatherapi.com/v1';
     const forecastEndPoint = '/forecast.json';
@@ -204,5 +186,4 @@ const screenController = async function screenController() {
   searchForm.addEventListener('submit', searchFormHandler);
   tempUnitsBtn.addEventListener('click', toggleTempUnit);
 };
-console.log('(NOTE) NEED TO ADD: \n*sunrise/sunset times');
 screenController();
